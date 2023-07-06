@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isInTable(char keyTable[5][5], char ch) {
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (keyTable[i][j] == ch) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+int main() {
+    char key[20];
+    char Table[5][5];
+    printf("Enter key: ");
+    scanf("%s",key);
+
+    int n = 0;
+    int index = 0;
+    bool isCharUsed[26] = { false };
+    for (int i = 0; key[i] != '\0'; i++) {
+        char ch = key[i];
+        if (!isCharUsed[ch - 'A']) {
+            Table[index / 5][index % 5] = ch;
+            index++;
+            isCharUsed[ch - 'A'] = true;
+            n++;
+        }
+    }
+
+    for (char ch = 'A'; ch <= 'Z'; ch++) {
+        if (ch != 'J' && !isInTable(Table, ch)) {
+            Table[index / 5][index % 5] = ch;
+            index++;
+        }
+    }
+
+    printf("Key Table:\n");
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            printf("%c ", Table[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
