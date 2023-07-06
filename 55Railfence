@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<string.h>
+int main(){
+    char str[50],e[50],d[50];
+    int i,j,k,l;
+    printf("enter text:");
+    scanf("%s",str);
+    l=strlen(str);
+    for(i=0;i<l;i++)
+        if(i%2==0)
+            e[j++]=str[i++];
+     for(i=0;i<l;i++)
+        if(i%2==1)
+            e[j++]=str[i++];
+    e[j]='\0';
+    if(l%2==0)
+        k=l/2;
+    else
+        k=(l/2)+1;
+    for(i=0,j=0;i<k;i++)
+    {
+        d[j]=e[i];
+        j+=2;
+    }
+    for(i=k,j=1;i<l;i++){
+         d[j]=e[i];
+         j+=2;
+    }
+    d[j]='\0';
+    printf("encrypted : %s \ndecrypted :%s",e,d);
+}
