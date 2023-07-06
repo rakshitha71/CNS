@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    char s[50],c[50],d[50];
+    int key,p;
+    printf("\n enter word:");
+    scanf("%s",s);
+    printf("enter key");
+    scanf("%d",&key);
+    p=strlen(s);
+    
+    for(int i=0 ;i<p;i++)
+    {
+        if(s[i]>='a'&& s[i]<='z')
+          {
+              c[i]='a'+(s[i]-'a'+key)%26;
+          }
+          if(s[i]>='A'&& s[i]<='Z')
+          {
+              c[i]='A'+(s[i]-'A'+key)%26;
+          }
+          else if(s[i]>='0' && s[i]<='9')
+          {
+              c[i]='0'+(s[i]-'0'+key)%26;
+          }
+    }
+    printf("encrpted word %s\n",c);
+    for(int i=0 ;i<p;i++)
+    {
+        if(c[i]>='a'&& c[i]<='z')
+          {
+              d[i]='a'+(c[i]-'a'-key)%26;
+          }
+          if(c[i]>='A'&& c[i]<='Z')
+          {
+              d[i]='A'+(c[i]-'A'-key)%26;
+          }
+          else if(c[i]>='0' && c[i]<='9')
+          {
+              d[i]='0'+(c[i]-'0'-key)%26;
+          }
+    }
+        printf("decrpted word %s",d);
+
+}
