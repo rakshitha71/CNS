@@ -2,12 +2,10 @@
 #include<string.h>
 #include<stdlib.h>
 #define SIZE 30
-
 void playCipher(char str[],char key[])
 {
     int i,j,keyLen=strlen(key),strLen=strlen(str),row=0,col=0,used[26]={0};
     char table[5][5]={0};
-    
     for(i=0;i<keyLen;i++)
     {
         if(key[i]!=' ' && !used[key[i]-'a'])
@@ -21,8 +19,7 @@ void playCipher(char str[],char key[])
                  row++;
              }
          }
-    }
-    
+    }    
     for(i=0;i<26;i++)
     {
         if(i!=('j'-'a') && !used[i])
@@ -35,8 +32,7 @@ void playCipher(char str[],char key[])
                 row++;
             }
         }
-    }
-    
+    } 
     for(i=0;i<strLen;i+=2){
         int r1,r2,c1,c2;
         for(row=0;row<5;row++)
@@ -57,7 +53,6 @@ void playCipher(char str[],char key[])
             str[i]=table[r1][c2],str[i+1]=table[r2][c1];
     }
 }
-
 int main()
 {
     char str[SIZE],key[SIZE];
