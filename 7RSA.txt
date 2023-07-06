@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int checkPrime(int n) {
+    int i;
+    if (n <= 1)
+        return 0;
+    for (i = 2; i * i <= n; i++) {
+        if (n % i == 0)
+            return 0;
+    }
+    return 1;
+}
+
+int findGcd(int a, int b) {
+    int gcd = 1;
+    for (int i = 2; i <= a && i <= b; i++) {
+        if (a % i == 0 && b % i == 0)
+            gcd = i;
+    }
+    return gcd;
+}
+
+int powMod(int a, int b, int n) {
+       if(b==0)
+        return 1;
+    long long int temp = powMod(a,b/2,n)%n;
+    long long int result=(temp*temp)%n;
+   if(b%2==1)
+    result=(result*a)%n;
+  return result;
+}
+
+int main() {
+    int p, q, n, phin, data;
+    while (1) {
+        printf("Enter two prime numbers: ");
+        scanf("%d %d", &p, &q);
+        if (!checkPrime(p) || !checkPrime(q))
+            printf("Both numbers should be prime.\n");
+        else
+            break;
+    }
+    n = p * q;
+    phin = (p - 1) * (q - 1);
+    
+    int e;
+    for (e = 5; e <= 100; e++) {
+        if (findGcd(phin, e) == 1)
+            break;
+    }
+    
+    int d;
+    for (d = 1; d <phin; d++) {
+        if ((d * e) % phin == 1)
+            break;
+    }
+    printf("p: %d and q: %d\n", p, q);
+    printf("value of e: %d\nvalue of d: %d\n", e, d);
+    printf("Enter the data to be encrypted: ");
+    scanf("%d", &data);
+    int cipher=powMod(data, e, n);
+    printf("Encryption: %d\n",cipher);
+    printf("Decryption: %d\n",powMod(cipher, d, n));
+    return 0;
+}
