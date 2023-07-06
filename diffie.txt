@@ -1,0 +1,23 @@
+#include<stdio.h>
+int power(int a,int b,int n){
+    if(b==0)
+        return 1;
+    long long int temp = power(a,b/2,n)%n;
+    long long int result=(temp*temp)%n;
+   if(b%2==1)
+    result=(result*a)%n;
+  return result;
+}
+int main()
+{
+    int q,alpha,x1,x2,y1,y2;
+    printf("\nenter q and alpha");
+    scanf("%d %d",&q,&alpha);
+    printf("\nenter alice and bob privatekeys");
+    scanf("%d %d",&x1,&x2);
+    y1=power(alpha,x1,q);
+    y2=power(alpha,x2,q);
+    printf("\npublic of alice and bob are %d %d",y1,y2);
+    printf("\nshared secretkey of alice %d",power(y2,x1,q));
+    printf("\nshared secretkey of bob %d",power(y1,x2,q));
+}
