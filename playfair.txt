@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define SIZE 30
+
+void playCipher(char str[],char key[])
+{
+    int i,j,keyLen=strlen(key),strLen=strlen(str),row=0,col=0,used[26]={0};
+    char table[5][5]={0};
+    
+    for(i=0;i<keyLen;i++)
+    {
+        if(key[i]!=' ' && !used[key[i]-'a'])
+         {
+            table[row][col]=key[i];
+            used[key[i]-'a']=1;
+            col++;
+            if(col==5)
+             {
+                 col=0;
+                 row++;
+             }
+         }
+    }
+    
+    for(i=0;i<26;i++)
+    {
+        if(i!=('j'-'a') && !used[i])
+        {
+            table[row][col]=i+'a';
+            col++;
+            if(col==5)
+            {
+                col==0;
+                row++;
+            }
+        }
+    }
+    
+    for(i=0;i<strLen;i+=2){
+        int r1,r2,c1,c2;
+        for(row=0;row<5;row++)
+        {
+            for(col=0;col<5;col++)
+            {
+                if(table[row][col]==str[i])
+                  r1=row,c1=col;
+                if(table[row][col]==str[i+1])
+                  r2=row,c2=col;
+            }
+        }
+        if(r1==r2)
+            str[i]=table[r1][(c1+1)%5],str[i+1]=table[r2][(c2+1)%5];
+        if(c1==c2)
+            str[i]=table[(r1+1)%5][c1],str[i+1]=table[(r2+1)%5][c2];
+        else
+            str[i]=table[r1][c2],str[i+1]=table[r2][c1];
+    }
+}
+
+int main()
+{
+    char str[SIZE],key[SIZE];
+    printf("enter key :");
+    scanf("%s",key);
+    printf("enter string:");
+    scanf("%s",str);
+    playCipher(str,key);
+    printf("encrypted %s",str);
+}
