@@ -1,0 +1,46 @@
+#include<string.h>
+#include<stdio.h>
+#include<stdlib.h>
+void printVigenereTable() {
+    char table[26][26];
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < 26; j++) {
+            table[i][j] = 'A' + (i + j) % 26;
+        }
+    }
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < 26; j++) {
+            printf("%c ", table[i][j]);
+        }
+        printf("\n");
+    }
+}
+void main()
+{
+    int i,j;
+    char str[50],key[30],newkey[30],encrypt[30],decrypt[30];
+    
+    printf("\n enter text :");
+    scanf("%s",str);
+    printf("\n enter key :");
+    scanf("%s",key);
+    
+    for(i=0,j=0;i<strlen(str);i++,j++)
+       {
+           if(j==strlen(key))   
+             j=0;
+        newkey[i]=key[j];
+       }
+    newkey[i]='\0';
+    
+    printf("NewKey %s",newkey);
+    for(i=0;i<strlen(str);i++)
+        encrypt[i]=((str[i]+newkey[i])%26)+'A';
+    encrypt[i]='\0';
+    printVigenereTable();
+    for(i=0;i<strlen(str);i++)
+        decrypt[i]=((encrypt[i]-newkey[i]+26)%26)+'A';
+    decrypt[i]='\0';
+    printf("\n encrypted text :%s",encrypt);
+    printf("\n decrypted text :%s",decrypt);
+}
